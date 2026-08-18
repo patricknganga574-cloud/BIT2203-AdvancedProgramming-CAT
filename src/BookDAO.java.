@@ -1,0 +1,15 @@
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * BookDAO.java
+ * Question 7b: Data Access Object retrieving library catalog records.
+ */
+public class BookDAO {
+    public List<Book> getAllBooks() {
+        List<Book> books = new ArrayList<>();
+        books.add(new Book(1, "Advanced Java Programming", "Jane Doe"));
+        books.add(new Book(2, "Database Systems Design", "John Smith"));
+        return books;
+    }
+}
