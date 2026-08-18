@@ -1,0 +1,37 @@
+import java.net.MalformedURLException;
+import java.net.URL;
+
+/**
+ * URLParser.java
+ * Question 1b: Extracts and displays components of a given URL.
+ */
+public class URLParser {
+    public static void main(String[] args) {
+        String urlString = "https://api.techstore.com:8443/products/category/electronics?sort=price&limit=20#reviews";
+        try {
+            URL url = new URL(urlString);
+            
+            System.out.println("Protocol: " + url.getProtocol());
+            System.out.println("Host: " + url.getHost());
+            System.out.println("Port: " + (url.getPort() == -1 ? url.getDefaultPort() : url.getPort()));
+            System.out.println("Path: " + url.getPath());
+            System.out.println("Query Parameters: " + url.getQuery());
+            System.out.println("Fragment: " + url.getRef());
+            
+            // Parsing query parameters into key-value pairs
+            String query = url.getQuery();
+            if (query != null) {
+                System.out.println("\nDetailed Query Pairs:");
+                String[] pairs = query.split("&");
+                for (String pair : pairs) {
+                    String[] keyValue = pair.split("=");
+                    if (keyValue.length == 2) {
+                        System.out.println("Key: " + keyValue[0] + ", Value: " + keyValue[1]);
+                    }
+                }
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+}
