@@ -1,0 +1,20 @@
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * AppConfig.java
+ * Question 4b: Spring Configuration class defining bean definitions for DI.
+ */
+@Configuration
+public class AppConfig {
+    @Bean
+    public UserRepository userRepository() {
+        return new UserRepository();
+    }
+
+    @Bean
+    public UserService userService() {
+        return new UserService(userRepository());
+    }
+}
+
