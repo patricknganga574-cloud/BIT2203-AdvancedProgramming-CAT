@@ -1,12 +1,12 @@
 # BIT 2203 Advanced Programming - Take-Away CAT
 
 ## Student Details
-* **Name:** [PATRICK MWANGI NG'ANG'A]
-* **Registration Number:** [SCT221-0598/2023]
+* **Name:** PATRICK MWANGI NG'ANG'A
+* **Registration Number:** SCT221-0598/2023
 
 ## Repository Structure & Program Description
 This repository contains the complete solutions for the BIT 2203 Advanced Programming Continuous Assessment Test (CAT):
-* **src/URLParser.java** - Parses and extracts URL parameters[cite: 1].
+* **src/URLParser.java** 
 * **src/UniversityDatabase.java** - Manages JDBC university connections and queries[cite: 1].
 * **src/ShoppingCartServlet.java** - Implements session management using `HttpSession`[cite: 1].
 * **src/UserService.java & UserRepository.java** - Demonstrates Dependency Injection in Spring[cite: 1].
