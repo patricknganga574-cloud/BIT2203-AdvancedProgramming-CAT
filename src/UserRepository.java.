@@ -1,0 +1,9 @@
+/**
+ * UserRepository.java
+ * Question 4b: Repository class handling database persistence operations for users.
+ */
+public class UserRepository {
+    public void saveUser() {
+        System.out.println("User saved to database.");
+    }
+}
