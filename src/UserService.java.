@@ -1,0 +1,16 @@
+/**
+ * UserService.java
+ * Question 4b: Service class demonstrating constructor injection with UserRepository.
+ */
+public class UserService {
+    private final UserRepository userRepository;
+
+    // Constructor Injection
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public void registerUser() {
+        userRepository.saveUser();
+    }
+}
