@@ -1,0 +1,35 @@
+import java.io.IOException;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * LifecycleDemoServlet.java
+ * Question 6b: Demonstrates the complete servlet lifecycle with log messages.
+ */
+@WebServlet("/lifecycle")
+public class LifecycleDemoServlet extends HttpServlet {
+    
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        System.out.println("LifecycleDemoServlet: init() called. Servlet initialized.");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        System.out.println("LifecycleDemoServlet: service() -> doGet() processing request.");
+        response.setContentType("text/html");
+        response.getWriter().println("<h1>Servlet Lifecycle Demo Active. Check server logs!</h1>");
+    }
+
+    @Override
+    public void destroy() {
+        System.out.println("LifecycleDemoServlet: destroy() called. Servlet being unloaded.");
+        super.destroy();
+    }
+}
