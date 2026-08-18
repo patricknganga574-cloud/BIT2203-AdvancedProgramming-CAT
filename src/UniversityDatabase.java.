@@ -1,0 +1,63 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+/**
+ * UniversityDatabase.java
+ * Question 2b: Connects to a database using JDBC, creates a courses table, inserts data, and queries records.
+ */
+public class UniversityDatabase {
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/university_db";
+    private static final String USER = "admin";
+    private static final String PASS = "secure123";
+
+    public static void main(String[] args) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+             Statement stmt = conn.createStatement()) {
+            
+            // Create table
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS courses (" +
+                    "course_id INT PRIMARY KEY, " +
+                    "course_name VARCHAR(100), " +
+                    "credits INT, " +
+                    "department VARCHAR(50))";
+            stmt.executeUpdate(createTableSQL);
+            System.out.println("Courses table created successfully.");
+
+            // Insert sample courses
+            String insertSQL = "INSERT IGNORE INTO courses (course_id, course_name, credits, department) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement pstmt = conn.prepareStatement(insertSQL)) {
+                insertCourse(pstmt, 101, "Advanced Programming", 3, "Computer Science");
+                insertCourse(pstmt, 102, "Data Structures", 4, "Computer Science");
+                insertCourse(pstmt, 103, "Calculus I", 3, "Mathematics");
+                System.out.println("Sample courses inserted.");
+            }
+
+            // Retrieve and display Computer Science courses
+            String querySQL = "SELECT * FROM courses WHERE department = 'Computer Science'";
+            try (ResultSet rs = stmt.executeQuery(querySQL)) {
+                System.out.println("\n--- Computer Science Courses ---");
+                while (rs.next()) {
+                    System.out.println("ID: " + rs.getInt("course_id") +
+                            ", Name: " + rs.getString("course_name") +
+                            ", Credits: " + rs.getInt("credits") +
+                            ", Dept: " + rs.getString("department"));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void insertCourse(PreparedStatement pstmt, int id, String name, int credits, String dept) throws SQLException {
+        pstmt.setInt(1, id);
+        pstmt.setString(2, name);
+        pstmt.setInt(3, credits);
+        pstmt.setString(4, dept);
+        pstmt.executeUpdate();
+    }
+}
