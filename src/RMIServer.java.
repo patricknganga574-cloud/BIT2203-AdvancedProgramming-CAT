@@ -1,0 +1,19 @@
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+/**
+ * RMIServer.java
+ * Question 5b: Main server application that initializes and binds the RMI registry service.
+ */
+public class RMIServer {
+    public static void main(String[] args) {
+        try {
+            Registry registry = LocateRegistry.createRegistry(1099);
+            TemperatureConverter service = new TemperatureConverterImpl();
+            registry.rebind("TemperatureService", service);
+            System.out.println("Temperature RMI Server is running...");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
