@@ -1,0 +1,21 @@
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+/**
+ * RMIClient.java
+ * Question 5b: RMI Client application that performs remote temperature conversion lookup.
+ */
+public class RMIClient {
+    public static void main(String[] args) {
+        try {
+            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+            TemperatureConverter comp = (TemperatureConverter) registry.lookup("TemperatureService");
+            
+            double celsius = 25.0;
+            double fahrenheit = comp.celsiusToFahrenheit(celsius);
+            System.out.println(celsius + "°C is equal to " + fahrenheit + "°F");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
